@@ -2727,6 +2727,7 @@ func (rl *clientConnReadLoop) processData(f *DataFrame) error {
 	cc := rl.cc
 	cs := rl.streamByID(f.StreamID)
 	data := f.Data()
+	defer wipeBuffer(data)
 	if cs == nil {
 		cc.mu.Lock()
 		neverSent := cc.nextStreamID

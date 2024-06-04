@@ -44,6 +44,7 @@ func getDataBufferChunk(size int64) []byte {
 }
 
 func putDataBufferChunk(p []byte) {
+	wipeBuffer(p)
 	switch len(p) {
 	case 1 << 10:
 		dataChunkPools[0].Put((*[1 << 10]byte)(p))
